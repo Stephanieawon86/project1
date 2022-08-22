@@ -14,7 +14,15 @@ agent any
         sh 'mvn package'
       }
     }
-    
+    stage ('Sonarqube analysis and tesing'){
+      steps{
+        script{
+          withSonarQubeEnv('sonarserver'){
+            sh 'mvn clean package sonar:sonar'
+          }
+        }
+      }
+    }    
     
     
   }
